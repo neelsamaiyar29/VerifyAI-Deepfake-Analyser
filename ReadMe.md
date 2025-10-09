@@ -13,10 +13,10 @@ We train and evaluate the same model on two datasets:
 
 ## 📈 Performance
 
-| Dataset    | Train Accuracy | Test Accuracy | Trained By           |
-|:----------:|:--------------:|:-------------:|:---------------------|
-| **DFDC**   |     96.47 %     |    95.19 %    | Vishal Singh       |
-| **AvLips** |     98.15 %     |    98.88 %    | Dnyanda Rahatal       |
+| Dataset    | Train Accuracy | Test Accuracy |
+|:----------:|:--------------:|:-------------:|
+| **DFDC**   |     96.47 %     |    95.19 %    |
+| **AvLips** |     98.15 %     |    98.88 %    |
 
 ---
 
