@@ -53,12 +53,11 @@ flowchart TB
 5. If the clip has fewer than 16 decodable frames, the last frame is repeated.
 6. Frames are resized to `224x224` and normalized with ImageNet mean and standard deviation.
 7. `process_audio()` decodes the audio track with `decord.AudioReader` at `16000 Hz` mono.
-8. If audio decoding fails, the code falls back to `ffmpeg` extraction and `librosa` loading.
-9. A 64-bin log-mel spectrogram is computed with `n_fft=1024` and `hop_length=512`.
-10. `align()` trims both modalities to the same sequence length.
-11. `CrossModalModel` extracts visual and audio features, fuses them with multi-head attention, and produces logits.
-12. `softmax()` converts logits into a probability distribution.
-13. The final response returns a label and a confidence score.
+8. The waveform is converted into a 64-bin log-mel spectrogram with `torchaudio`, using `n_fft=1024` and `hop_length=512`.
+9. `align()` trims both modalities to the same sequence length.
+10. `CrossModalModel` extracts visual and audio features, fuses them with multi-head attention, and produces logits.
+11. `softmax()` converts logits into a probability distribution.
+12. The final response returns a label and a confidence score.
 
 ## Repository Layout
 
@@ -141,7 +140,7 @@ python inference.py --video sample.mp4
 
 ## Docker
 
-The Docker image runs the FastAPI app on port `8000`.
+The Docker image runs the FastAPI app on port `8000` and only installs the runtime dependencies needed for API inference.
 
 Build the image:
 
@@ -178,3 +177,4 @@ The repo includes the model code, inference code, UI, Docker config, and the bun
 - `sample.mp4` is the bundled demo clip used by the browser UI and Streamlit app.
 - The FastAPI app returns a full HTML landing page at `/`, so the root URL is no longer just a JSON response.
 - The preprocessing pipeline is shared by the web app, Streamlit app, and CLI inference so results stay consistent.
+- The Docker image excludes the Streamlit dashboard and training-time extras so it stays small enough to publish reliably.
