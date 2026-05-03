@@ -22,7 +22,9 @@ src = Path("requirements.txt").read_text().splitlines()
 filtered = [
     line
     for line in src
-    if not line.startswith(("torch==", "torchvision==", "torchaudio=="))
+    if not line.startswith(
+        ("torch==", "torchvision==", "torchaudio==", "streamlit", "opencv-python")
+    )
 ]
 Path("requirements-docker.txt").write_text("\n".join(filtered) + "\n")
 PY
