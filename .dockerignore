@@ -1,0 +1,13 @@
+# Local virtual env
+.venv/
+
+# Python cache and logs
+__pycache__/
+*.pyc
+*.pyo
+*.log
+*.err
+
+# Git metadata
+.git/
+.gitignore
